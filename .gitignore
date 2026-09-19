@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+
+# state DBs are run artifacts, never source
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+.salvage-state.sqlite3*
+
+.DS_Store
+
+# personal Claude Code tool permissions, not project config
+.claude/settings.local.json

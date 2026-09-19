@@ -1,0 +1,22 @@
+[project]
+name = "salvage"
+version = "0.1.0"
+description = "Resilient, resumable, TUI-driven file copier for a dying disk"
+requires-python = ">=3.10"
+dependencies = [
+    "textual>=0.60",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+salvage = "salvage.__main__:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["salvage"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

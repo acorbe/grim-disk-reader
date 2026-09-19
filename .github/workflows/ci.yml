@@ -1,0 +1,27 @@
+name: ci
+
+# Says something true to a stranger before they clone it: it lints, and its
+# tests pass on the Pythons it claims to support.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install --upgrade pip pytest ruff
+      # ruff's documented default rules, written out rather than left implicit.
+      # "Whatever ruff checks by default" is a moving target, and a public
+      # repository should not go red on a Tuesday because a new rule shipped.
+      - run: ruff check . --select E4,E7,E9,F
+      - run: pytest -q

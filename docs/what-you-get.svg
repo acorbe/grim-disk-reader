@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" role="img" aria-labelledby="t d">
+  <title id="t">What salvage leaves you with</title>
+  <desc id="d">A failing disk on the left, drawn as a circle in six pieces with two small red parts that cannot be read. A healthy disk on the right. The pieces are checked off in order of priority and copied to the healthy disk pass by pass. The red parts are skipped and placed on a list. On a later pass one of them is read after all and joins the files; the other stays on the list.</desc>
+  <style>
+    /* One 20 s loop. Everything is keyed to the same timeline, so the captions
+       and the pieces cannot drift apart. Colours are literal, because this file
+       is served as an image and inherits nothing from the page around it. */
+    svg { --fg: #23262b; --muted: #6b7078; --faint: #e4e5e7; --panel: #ffffff;
+          --bad: #c8412f; --bad-soft: #f3c9c2; --ok: #2f8f5b; }
+    @media (prefers-color-scheme: dark) {
+      svg { --fg: #e6e4de; --muted: #9b9fa7; --faint: #363a41; --panel: #1f2227;
+            --bad: #ef7b68; --bad-soft: #6a3129; --ok: #5fc48a; }
+    }
+    text { fill: var(--fg); font-size: 14px;
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    text.mono { font-size: 14px; font-weight: 600;
+                font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    text.muted { fill: var(--muted); font-size: 13px; }
+    text.bad { fill: var(--bad); }
+    .cap text { font-size: 16px; }
+    text.badge { font-size: 12px; font-weight: 600; fill: var(--panel); }
+    .wedge { fill: var(--faint); stroke: var(--panel); stroke-width: 2; stroke-linejoin: round; }
+    .hub { fill: var(--panel); stroke: var(--fg); stroke-width: 1.4; }
+    .bit { fill: var(--bad-soft); stroke: var(--bad); stroke-width: 1.4; stroke-linejoin: round; }
+    .folder { fill: none; stroke: var(--fg); stroke-width: 1.6; stroke-linejoin: round; }
+    .note { fill: none; stroke: var(--bad); stroke-width: 1.6; stroke-linejoin: round; }
+    .wire { stroke: var(--fg); stroke-width: 1.6; fill: none; stroke-linecap: round; }
+    .arrow, .pin { fill: var(--fg); }
+    .drive { fill: none; stroke: var(--fg); stroke-width: 1.4; stroke-dasharray: 5 4; }
+    .hdd { fill: var(--fg); }
+    .hdd-bad { fill: var(--bad); }
+    .light { fill: var(--panel); }
+    .split { stroke: var(--panel); stroke-width: 2.2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+    .tick { stroke: var(--ok); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    .w, .bitA, .bitB, .lbl, .badge-g, .cap {
+      animation-duration: 20s; animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite; animation-fill-mode: both;
+    }
+    .w, .bitA, .bitB { transform-box: view-box; transform-origin: 150px 150px; }
+    .w.photos { animation-name: to-folder-photos; }
+    .w.docs { animation-name: to-folder-docs; }
+    .w.rest { animation-name: to-folder-rest; }
+    .bitA { animation-name: bit-a; }
+    .bitB { animation-name: bit-b; }
+    @keyframes to-folder-photos {
+      0%, 22% { transform: none; }
+      30%, 100% { transform: translate(300px, -38px) scale(0.43); }
+    }
+    @keyframes to-folder-docs {
+      0%, 38% { transform: none; }
+      45%, 100% { transform: translate(300px, -38px) scale(0.43); }
+    }
+    @keyframes to-folder-rest {
+      0%, 50% { transform: none; }
+      57%, 100% { transform: translate(300px, -38px) scale(0.43); }
+    }
+    @keyframes bit-a {
+      0%, 24% { transform: none; fill: var(--bad-soft); stroke: var(--bad); }
+      32%, 62% { transform: translate(290px, 54px) scale(0.56); fill: var(--bad-soft); stroke: var(--bad); }
+      70%, 100% { transform: translate(300px, -38px) scale(0.43); fill: var(--faint); stroke: var(--panel); }
+    }
+    @keyframes bit-b {
+      0%, 52% { transform: none; }
+      60%, 100% { transform: translate(290px, 54px) scale(0.56); }
+    }
+    .lbl.photos { animation-name: hide-at-22; }
+    .lbl.docs { animation-name: hide-at-38; }
+    .lbl.rest { animation-name: hide-at-50; }
+    @keyframes hide-at-22 { 0%, 22% { opacity: 1; } 24%, 100% { opacity: 0; } }
+    @keyframes hide-at-38 { 0%, 38% { opacity: 1; } 40%, 100% { opacity: 0; } }
+    @keyframes hide-at-50 { 0%, 50% { opacity: 1; } 52%, 100% { opacity: 0; } }
+    .badge-g.p1 { animation-name: badge-1; }
+    .badge-g.p2 { animation-name: badge-2; }
+    .badge-g.p3 { animation-name: badge-3; }
+    @keyframes badge-1 { 0%, 10% { opacity: 0; } 12%, 22% { opacity: 1; } 24%, 100% { opacity: 0; } }
+    @keyframes badge-2 { 0%, 13% { opacity: 0; } 15%, 38% { opacity: 1; } 40%, 100% { opacity: 0; } }
+    @keyframes badge-3 { 0%, 16% { opacity: 0; } 18%, 50% { opacity: 1; } 52%, 100% { opacity: 0; } }
+    .cap { animation-timing-function: linear; }
+    .cap.c0 { animation-name: cap-0; }
+    .cap.c1 { animation-name: cap-1; }
+    .cap.c2 { animation-name: cap-2; }
+    .cap.c3 { animation-name: cap-3; }
+    .cap.c4 { animation-name: cap-4; }
+    .cap.c5 { animation-name: cap-5; }
+    .cap.c6 { animation-name: cap-6; }
+    @keyframes cap-0 { 0%, 9% { opacity: 1; } 10%, 100% { opacity: 0; } }
+    @keyframes cap-1 { 0%, 10% { opacity: 0; } 11%, 21% { opacity: 1; } 22%, 100% { opacity: 0; } }
+    @keyframes cap-2 { 0%, 22% { opacity: 0; } 23%, 35% { opacity: 1; } 36%, 100% { opacity: 0; } }
+    @keyframes cap-3 { 0%, 36% { opacity: 0; } 37%, 47% { opacity: 1; } 48%, 100% { opacity: 0; } }
+    @keyframes cap-4 { 0%, 48% { opacity: 0; } 49%, 59% { opacity: 1; } 60%, 100% { opacity: 0; } }
+    @keyframes cap-5 { 0%, 60% { opacity: 0; } 61%, 73% { opacity: 1; } 74%, 100% { opacity: 0; } }
+    @keyframes cap-6 { 0%, 74% { opacity: 0; } 75%, 99% { opacity: 1; } 100% { opacity: 0; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .w, .bitA, .bitB, .lbl, .badge-g, .cap { animation: none; }
+      .cap { opacity: 0; }
+      .cap.c0 { opacity: 1; }
+      .badge-g { opacity: 1; }
+    }
+  </style>
+
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- top row: the two disks -->
+  <rect x="80" y="28" width="34" height="14" rx="3" class="hdd-bad"/>
+  <rect x="80" y="43" width="34" height="9" rx="3" class="hdd-bad"/>
+  <circle cx="103.5" cy="47.5" r="1.7" class="light"/>
+  <circle cx="109" cy="47.5" r="1.7" class="light"/>
+  <path d="M95 27 l4 5 l-5 4 l5 7" class="split"/>
+  <text x="124" y="45" class="muted">the failing disk</text>
+  <rect x="368" y="24" width="264" height="228" rx="10" class="drive"/>
+  <rect x="384" y="28" width="34" height="14" rx="3" class="hdd"/>
+  <rect x="384" y="43" width="34" height="9" rx="3" class="hdd"/>
+  <circle cx="407.5" cy="47.5" r="1.7" class="light"/>
+  <circle cx="413" cy="47.5" r="1.7" class="light"/>
+  <path d="M424 43 l3 3 l6 -6" class="tick"/>
+  <text x="440" y="45" class="muted">a healthy disk</text>
+
+  <!-- destination: folder and list, on the healthy disk -->
+  <path d="M380 66 h60 l12 12 h168 v70 h-240 z" class="folder"/>
+  <text x="500" y="106">your files</text>
+  <text x="500" y="126" class="muted">as they were</text>
+  <path d="M380 162 h216 l24 24 v54 h-240 z" class="note"/>
+  <path d="M596 162 v24 h24" class="note"/>
+  <text x="500" y="198" class="bad">could not be read</text>
+  <text x="500" y="218" class="muted">listed by name</text>
+
+  <!-- the failing disk, six pieces -->
+  <g class="w photos"><path d="M150 150 L150 70 A80 80 0 0 1 219.28 110 Z" class="wedge"/></g>
+  <g class="w photos"><path d="M150 150 L219.28 110 A80 80 0 0 1 219.28 190 Z" class="wedge"/></g>
+  <g class="w docs"><path d="M150 150 L219.28 190 A80 80 0 0 1 150 230 Z" class="wedge"/></g>
+  <g class="w rest"><path d="M150 150 L150 230 A80 80 0 0 1 80.72 190 Z" class="wedge"/></g>
+  <g class="w rest"><path d="M150 150 L80.72 190 A80 80 0 0 1 80.72 110 Z" class="wedge"/></g>
+  <g class="w rest"><path d="M150 150 L80.72 110 A80 80 0 0 1 150 70 Z" class="wedge"/></g>
+  <!-- the two parts that will not read -->
+  <path d="M205 150 L230 150 A80 80 0 0 1 225.18 177.36 L201.68 168.81 A55 55 0 0 0 205 150 Z" class="bit bitA"/>
+  <path d="M95.84 159.55 L71.22 163.89 A80 80 0 0 1 71.22 136.11 L95.84 140.45 A55 55 0 0 0 95.84 159.55 Z" class="bit bitB"/>
+  <circle cx="150" cy="150" r="7" class="hub"/>
+
+  <!-- what each group is -->
+  <text x="191.57" y="130" class="lbl photos" text-anchor="middle">photos</text>
+  <text x="174" y="195.57" class="lbl docs" text-anchor="middle">documents</text>
+  <text x="115" y="154" class="lbl rest" text-anchor="middle">the rest</text>
+
+  <!-- priority badges -->
+  <g class="badge-g p1"><circle cx="231.41" cy="103" r="11" class="pin"/><text x="231.41" y="107" class="badge" text-anchor="middle">1</text></g>
+  <g class="badge-g p2"><circle cx="197" cy="231.41" r="11" class="pin"/><text x="197" y="235.41" class="badge" text-anchor="middle">2</text></g>
+  <g class="badge-g p3"><circle cx="56" cy="150" r="11" class="pin"/><text x="56" y="154" class="badge" text-anchor="middle">3</text></g>
+
+  <!-- salvage -->
+  <line x1="252" y1="150" x2="362" y2="150" class="wire" marker-end="url(#ar)"/>
+  <text x="307" y="136" class="mono" text-anchor="middle">salvage</text>
+  <text x="307" y="170" class="muted" text-anchor="middle">read only</text>
+
+  <!-- captions, one at a time -->
+  <g class="cap c0"><text x="380" y="292" text-anchor="middle">A failing disk on the left, a healthy one on the right. Two parts will not read anymore.</text></g>
+  <g class="cap c1"><text x="380" y="292" text-anchor="middle">Check off what matters most, in order: photos, documents, the rest.</text></g>
+  <g class="cap c2"><text x="380" y="286" text-anchor="middle">Pass 1: the photos go to the healthy disk.</text><text x="380" y="306" text-anchor="middle">The part that cannot be read is skipped and written down.</text></g>
+  <g class="cap c3"><text x="380" y="292" text-anchor="middle">Pass 2: the documents.</text></g>
+  <g class="cap c4"><text x="380" y="292" text-anchor="middle">Pass 3: everything else. Another unreadable part goes on the list.</text></g>
+  <g class="cap c5"><text x="380" y="292" text-anchor="middle">Pass 4: retry the list. This time one of them reads.</text></g>
+  <g class="cap c6"><text x="380" y="286" text-anchor="middle">Stop whenever. Each pass starts where the last one ended.</text><text x="380" y="306" text-anchor="middle">What is still unreadable stays on the list, by name.</text></g>
+</svg>
