@@ -20,6 +20,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: pip install --upgrade pip pytest ruff
+      - run: pip install -e .
       # ruff's documented default rules, written out rather than left implicit.
       # "Whatever ruff checks by default" is a moving target, and a public
       # repository should not go red on a Tuesday because a new rule shipped.
